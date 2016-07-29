@@ -63,10 +63,10 @@ class Section(object):
     return '\n'.join(self.lines)
 
 songs = []
-song_directory = os.getcwd()+'/songs/'
+song_directory = os.path.dirname(os.path.realpath(__file__))+'/songs'
 
 for filename in os.listdir(song_directory):
-  f = open(song_directory+filename, 'r')
+  f = open(song_directory+'/'+filename, 'r')
   content = str(f.read()).split('\n')
   
   current_song = Song(name = content[0])

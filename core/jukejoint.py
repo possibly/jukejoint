@@ -23,9 +23,9 @@ def establish_setting():
     chosen_bar.people_here_now.remove(person)
 
   Person.make_decision = have_person_storm_out_of_bar
-  Person.mind.explicit_thoughts = []
+  Person.explicit_thoughts = []
   PersonExNihilo.make_decision = have_person_storm_out_of_bar
-  PersonExNihilo.mind.explicit_thoughts = []
+  PersonExNihilo.explicit_thoughts = []
 
 
   # Rig the generation of the city to always have 3 bars.
@@ -45,11 +45,11 @@ def establish_setting():
   chosen_bar = oldest_bar_in_town
 
   return {
-    'personA': chosen_bar.people_here_now[0],
-    'personB': chosen_bar.people_here_now[1],
+    'personA': list(chosen_bar.people_here_now)[0],
+    'personB': list(chosen_bar.people_here_now)[1],
     'bar name': chosen_bar.name,
     'bar founded': chosen_bar.founded,
-    'city name': city.name
+    'city name': tott_instance.city.name
   }
 
 def establish_monologue(selection_index, people_here_now):
@@ -69,7 +69,7 @@ def establish_monologue(selection_index, people_here_now):
         thought = person.mind.elicit_thought(stimuli)
         if thought:
           thought.execute()
-          person.mind.explicit_thoughts.append(thought.realize().lstrip())
+          person.explicit_thoughts.append(thought.realize().lstrip())
           person.mind.thoughts.append(thought)
           if person.made_decision:
               have_person_storm_out_of_bar(person=person)
@@ -81,6 +81,6 @@ def establish_monologue(selection_index, people_here_now):
       has_finished = True
   
   return {
-    'personA thoughts': people_here_now[0].mind.explicit_thoughts,
-    'personB thoughts': people_here_now[0].mind.explicit_thoughts
+    'personA thoughts': people_here_now[0].explicit_thoughts,
+    'personB thoughts': people_here_now[0].explicit_thoughts
   }

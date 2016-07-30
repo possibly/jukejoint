@@ -1,9 +1,35 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>yep</title>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script> var socket = io.connect(); </script>
+  <title>Jukejoint</title>
 </head>
 <body>
+
+  <button onclick="load()">Start!</button>
+  <script>
+    var barFounded = false;
+    var barName = false;
+    var cityName = false;
+    var personAName = false;
+    var personBName = false;
+
+    function load(){
+      console.log('emit load')
+      socket.emit('load');
+      socket.on('load ready', loadReady);
+    }
+
+    function loadReady(data){
+      barFounded = data['bar founded'];
+      barName = data['bar name'];
+      cityName = data['city name'];
+      personAName = data['person A'];
+      personBName = data['person B'];
+      console.dir(data)
+    }
+  </script>
 
 </body>
 </html>

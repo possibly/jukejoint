@@ -16,7 +16,7 @@
     var personBName = false;
 
     function load(){
-      console.log('emit load')
+      console.log('emit load');
       socket.emit('load');
       socket.on('load ready', loadReady);
     }
@@ -27,7 +27,28 @@
       cityName = data['city name'];
       personAName = data['person A'];
       personBName = data['person B'];
-      console.dir(data)
+      console.dir(data);
+
+      var song_selection = document.getElementById('songSelection');
+      song_selection.style.display = 'block';
+    }
+  </script>
+
+  <div id="songSelection" style='display: none;'>
+    <button onclick="selectSong('Loretta Lynn')">Coal Miners Daughter by Loretta Lynn</button>
+    <button onclick="selectSong('Rick Astley')">Never Gonna Give You Up by Rick Astley</button>
+    <button onclick="selectSong('Bruce Springsteen')">The River by Bruce Springsteen</button>
+  </div>
+  <script>
+    function selectSong(artist_name){
+      console.log('emit song selection');
+      socket.emit('song selection', artist_name);
+      socket.on('song ready', songReady);
+    }
+
+    function songReady(monologues){
+      console.log('song ready');
+      console.dir(monologues);
     }
   </script>
 

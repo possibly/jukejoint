@@ -31,5 +31,15 @@ def load():
     'bar name': info['bar name'],
     'bar founded': info['bar founded'],
     'city name': info['city name']
-  }}, room=request.sid);
+  }}, room=request.sid)
   print "emit load ready"
+
+@socketio.on('song selection')
+def song_selection(artist_name):
+  print "song selection"
+  personA = db[request.sid]['personA']
+  personB = db[request.sid]['personB']
+  people_here_now = [personA, personB]
+  thoughts = jukejoint.establish_monologue(artist_name, people_here_now)
+  emit('song ready', {'data': thoughts}, room=request.sid)
+  print "monologue/song ready"

@@ -20,7 +20,7 @@ def establish_setting():
     person.made_decision = False
     
   def have_person_storm_out_of_bar(person):
-    chosen_bar.people_here_now.remove(person)
+    return "hack"
 
   Person.make_decision = have_person_storm_out_of_bar
   Person.explicit_thoughts = []
@@ -52,8 +52,8 @@ def establish_setting():
     'city name': tott_instance.city.name
   }
 
-def establish_monologue(selection_index, people_here_now):
-  current_song = songs[selection_index]
+def establish_monologue(artist_name, people_here_now):
+  current_song = [song for song in songs if song.artist_name == artist_name][0]
   continue_song = True
 
   #Loop through song lyrics
@@ -66,13 +66,20 @@ def establish_monologue(selection_index, people_here_now):
       #Everyone in the bar will consider the song lyrics.
       for person in people_here_now:
         stimuli = person.mind.associate(current_song)
-        thought = person.mind.elicit_thought(stimuli)
+        
+        thought = None
+        while thought == None:
+          try:
+            thought = person.mind.elicit_thought(stimuli)
+          except TypeError:
+            print "This should be fixed, some day."
+
         if thought:
           thought.execute()
           person.explicit_thoughts.append(thought.realize().lstrip())
           person.mind.thoughts.append(thought)
           if person.made_decision:
-              have_person_storm_out_of_bar(person=person)
+              people_here_now.remove(person)
         else:
           person.mind.explicit_thoughts.append('...')
 

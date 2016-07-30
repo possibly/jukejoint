@@ -4,6 +4,7 @@ class Song(object):
 
   def __init__(self, name):
     self.name = name
+    self.artist_name = name[name.find('by')+3:]
     self.sections = []
     self.current_section = None
     self.current_theme = None
@@ -22,14 +23,6 @@ class Song(object):
       raise StopIteration
 
     self.current_theme = current_section[1].theme
-
-    # if current_section[0] is 0:
-    #   print '\n'+self.name+' begins to play...\n'
-
-    print '\n\n{music_notes}\n{lyrics}\n{music_notes}'.format(
-      music_notes='{note} {note} {note}'.format(note='\xe2\x99\xab'),
-      lyrics=current_section[1].display_lines()
-    )
 
   def stop(self):
     try:

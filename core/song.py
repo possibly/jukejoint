@@ -19,26 +19,21 @@ class Song(object):
     try:
       current_section = self.current_section.next()
     except StopIteration:
-      self.stop()
       raise StopIteration
 
     self.current_theme = current_section[1].theme
 
-  def stop(self):
-    try:
-      self.current_section.next()
-    except StopIteration:
-      # print "\nThe song is over. The jukebox's lights continue to blink expectantly.\n"
-      pass
-    else:
-      # print '\nThe jukebox comes to a dead stop mid-lyric. The silence sounds deafening compared to the music that filled the air previously.\n'
-      pass
+  def reset(self):
     self.current_section = None
 
   @property
   def signals(self):
     """Return the current theme."""
     return [(self.current_theme, 1)]
+
+  def get_section_lyrics(self):
+    # For the web version of the game. The client only needs to know the lines to output for the given song.
+    return [s.lines for s in self.sections]
 
 class Section(object):
 

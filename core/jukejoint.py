@@ -17,16 +17,14 @@ def establish_setting():
 
   # Modify TOTT's People to keep some additional state.
   for person in tott_instance.city.residents:
-    person.made_decision = False
-    
+      person.mind.made_decision = False
+      person.mind.explicit_thoughts = []
+
   def have_person_storm_out_of_bar(person):
-    return "hack"
+    person.mind.made_decision = True
 
   Person.make_decision = have_person_storm_out_of_bar
-  Person.explicit_thoughts = []
   PersonExNihilo.make_decision = have_person_storm_out_of_bar
-  PersonExNihilo.explicit_thoughts = []
-
 
   # Rig the generation of the city to always have 3 bars.
   while not tott_instance.city.businesses_of_type('Bar'):
@@ -54,7 +52,9 @@ def establish_setting():
 
 def establish_monologue(artist_name, people_here_now):
   current_song = [song for song in songs if song.artist_name == artist_name][0]
+  current_song.reset() # in case this is a replay through of the game.
   continue_song = True
+  patrons = [people_here_now[0], people_here_now[1]]
 
   #Loop through song lyrics
   while continue_song:
@@ -66,28 +66,23 @@ def establish_monologue(artist_name, people_here_now):
       #Everyone in the bar will consider the song lyrics.
       for person in people_here_now:
         stimuli = person.mind.associate(current_song)
-        
-        thought = None
-        while thought == None:
-          try:
-            thought = person.mind.elicit_thought(stimuli)
-          except TypeError:
-            print "This should be fixed, some day."
-
+        thought = person.mind.elicit_thought(stimuli)
         if thought:
           thought.execute()
-          person.explicit_thoughts.append(thought.realize().lstrip())
+          person.mind.explicit_thoughts.append(thought.realize().lstrip())
           person.mind.thoughts.append(thought)
-          if person.made_decision:
+          if person.mind.made_decision:
               people_here_now.remove(person)
+              if len(people_here_now) == 0:
+                continue_song = False
         else:
           person.mind.explicit_thoughts.append('...')
 
     except StopIteration:
       continue_song = False
-      has_finished = True
-  
+
   return {
-    'personA thoughts': people_here_now[0].explicit_thoughts,
-    'personB thoughts': people_here_now[0].explicit_thoughts
+    'personA thoughts': patrons[0].mind.explicit_thoughts,
+    'personB thoughts': patrons[1].mind.explicit_thoughts,
+    'song sections': current_song.get_section_lyrics()
   }

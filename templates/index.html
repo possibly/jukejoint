@@ -6,49 +6,41 @@
   <title>Jukejoint</title>
 </head>
 <body>
+  <div class="game-container">
+    {% include 'title-screen.html' %}
+    {% include 'game-loading.html' %}
+    <div id='dialogue-intro' style='display: none;'></div>
+    {% include 'song-selection.html' %}
+    <div id='monologues' style='display: none;'></div>
+  </div>
 
-  <button onclick="load()">Start!</button>
   <script>
-    var barFounded = false;
-    var barName = false;
-    var cityName = false;
-    var personAName = false;
-    var personBName = false;
+    var transition_index = 0;
+    var transition_scenes = ['title-screen', 'game-loading', 'dialogue-intro', 'song-selection', 'monologues'];
+
+    function transition(){
+      var currentlyAt = transition_scenes[transition_index];
+      if (transition_index+1 == transition_scenes.length){
+        transition_index = 0;
+      }else{
+        transition_index += 1;
+      }
+      var toBeAt = transition_scenes[transition_index];
+      console.log('to be at: '+toBeAt);
+
+      document.getElementById(currentlyAt).style.display = 'none';
+      document.getElementById(toBeAt).style.display = 'block';
+    }
 
     function load(){
-      console.log('emit load');
-      socket.emit('load');
       socket.on('load ready', loadReady);
+      socket.emit('load');
+      transition();
     }
 
-    function loadReady(data){
-      barFounded = data['bar founded'];
-      barName = data['bar name'];
-      cityName = data['city name'];
-      personAName = data['person A'];
-      personBName = data['person B'];
-      console.dir(data);
-
-      var song_selection = document.getElementById('songSelection');
-      song_selection.style.display = 'block';
-    }
-  </script>
-
-  <div id="songSelection" style='display: none;'>
-    <button onclick="selectSong('Loretta Lynn')">Coal Miners Daughter by Loretta Lynn</button>
-    <button onclick="selectSong('Rick Astley')">Never Gonna Give You Up by Rick Astley</button>
-    <button onclick="selectSong('Bruce Springsteen')">The River by Bruce Springsteen</button>
-  </div>
-  <script>
-    function selectSong(artist_name){
-      console.log('emit song selection');
-      socket.emit('song selection', artist_name);
-      socket.on('song ready', songReady);
-    }
-
-    function songReady(monologues){
-      console.log('song ready');
-      console.dir(monologues);
+    function loadReady(template){
+      document.getElementById('dialogue-intro').innerHTML = template;
+      document.getElementById('loading-continue').style.display = 'block';
     }
   </script>
 

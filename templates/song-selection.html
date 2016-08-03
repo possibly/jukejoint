@@ -1,0 +1,17 @@
+<div id="song-selection" style='display: none;'>
+  <button onclick="selectSong('Loretta Lynn')">Coal Miners Daughter by Loretta Lynn</button><br>
+  <button onclick="selectSong('Rick Astley')">Never Gonna Give You Up by Rick Astley</button><br>
+  <button onclick="selectSong('Bruce Springsteen')">The River by Bruce Springsteen</button><br>
+</div>
+
+<script>
+  function selectSong(artist_name){
+    socket.on('song ready', songReady);
+    socket.emit('song selection', artist_name);
+  }
+
+  function songReady(template){
+    document.getElementById('monologues').innerHTML = template;
+    transition();
+  }
+</script>

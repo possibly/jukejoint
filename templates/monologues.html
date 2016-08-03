@@ -1,0 +1,19 @@
+{% for lyric_chunk in songSections %}
+  <div id='lyric-chunk-{{ loop.index0 }}'>
+    [note][note][note]<br>
+    <br>
+    {% for lyric in lyric_chunk %}
+      {{ lyric }}<br>
+    {% endfor %}
+    <br>
+    [note][note][note]<br>
+    <br>
+    {% if thoughtsA|length > loop.index0 %}
+      {{ nameA }}: {{ thoughtsA[loop.index0] }}<br>
+    {% endif %}
+    {% if thoughtsB|length > loop.index0 %}
+      {{ nameB }}: {{ thoughtsB[loop.index0] }}<br>
+    {% endif %}
+    <br>
+  </div>
+{% endfor %}

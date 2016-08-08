@@ -1,11 +1,11 @@
 import sys
 import time
 import datetime
-from ..talktown.game import Game
-from ..talktown.person import Person, PersonExNihilo
+from talktown.game import Game
+from talktown.person import Person, PersonExNihilo
 import random
 from song import songs
-from ..talktown.business import Bar
+from talktown.business import Bar
 
 def establish_setting():
   # Have TOTT do its thing.

@@ -5,12 +5,10 @@ A prototype demonstrating sensitive agents and evocative artifacts
 
 todo
 
-make sure to `pip install requirements.txt`
+make sure to `pip install requirements.txt` (pro tip: use a virtual environment.)
 
 make sure to `git clone` talktown directory onto the same level as app.py.
 
 ```
-export FLASK_APP=app.py
-export FLASK_DEBUG=1
-flask run
+flask run app.py
 ```

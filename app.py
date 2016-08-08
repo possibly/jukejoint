@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, request
-from flask.ext.socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit, join_room
 from core import jukejoint
 import json
 
@@ -44,3 +44,6 @@ def song_selection(artist_name):
     nameA=db[request.sid]['personA'],
     nameB=db[request.sid]['personB']
   ), room=request.sid)
+
+if __name__ == '__main__':
+    socketio.run(app)

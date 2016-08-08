@@ -15,17 +15,6 @@ def establish_setting():
   tott_instance.establish_setting()
   tott_instance.enact_no_fi_simulation()
 
-  # Modify TOTT's People to keep some additional state.
-  for person in tott_instance.city.residents:
-      person.mind.made_decision = False
-      person.mind.explicit_thoughts = []
-
-  def have_person_storm_out_of_bar(person):
-    person.mind.made_decision = True
-
-  Person.make_decision = have_person_storm_out_of_bar
-  PersonExNihilo.make_decision = have_person_storm_out_of_bar
-
   # Rig the generation of the city to always have 3 bars.
   while not tott_instance.city.businesses_of_type('Bar'):
     owner = tott_instance._determine_who_will_establish_new_business(business_type=Bar)
@@ -55,6 +44,17 @@ def establish_monologue(artist_name, people_here_now):
   current_song.reset() # in case this is a replay through of the game.
   continue_song = True
   patrons = [people_here_now[0], people_here_now[1]]
+
+  # Modify TOTT's People to keep some additional state.
+  def make_decision(self):
+    self.made_decision = True
+
+  Person.make_decision = make_decision
+  PersonExNihilo.make_decision = make_decision
+
+  for person in people_here_now:
+      person.mind.made_decision = False
+      person.mind.explicit_thoughts = []
 
   #Loop through song lyrics
   while continue_song:

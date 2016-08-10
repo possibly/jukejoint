@@ -1,7 +1,6 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit, join_room
 from core import jukejoint
-import json
 
 app = Flask(__name__)
 db = {}

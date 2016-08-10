@@ -2,46 +2,17 @@
 <html>
 <head>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="/static/js/main.js"></script>
   <script> var socket = io.connect(); </script>
   <title>Jukejoint</title>
 </head>
 <body>
   <div class="game-container">
     {% include 'title-screen.html' %}
-    {% include 'game-loading.html' %}
+    <div id='game-loading' style='display: none;'></div>
     <div id='dialogue-intro' style='display: none;'></div>
     {% include 'song-selection.html' %}
     <div id='monologues' style='display: none;'></div>
   </div>
-
-  <script>
-    var transition_index = 0;
-    var transition_scenes = ['title-screen', 'game-loading', 'dialogue-intro', 'song-selection', 'monologues'];
-
-    function transition(){
-      var currentlyAt = transition_scenes[transition_index];
-      if (transition_index+1 == transition_scenes.length){
-        transition_index = 0;
-      }else{
-        transition_index += 1;
-      }
-      var toBeAt = transition_scenes[transition_index];
-
-      document.getElementById(currentlyAt).style.display = 'none';
-      document.getElementById(toBeAt).style.display = 'block';
-    }
-
-    function load(){
-      socket.on('load ready', loadReady);
-      socket.emit('load');
-      transition();
-    }
-
-    function loadReady(template){
-      document.getElementById('dialogue-intro').innerHTML = template;
-      document.getElementById('loading-continue').style.display = 'block';
-    }
-  </script>
-
 </body>
 </html>

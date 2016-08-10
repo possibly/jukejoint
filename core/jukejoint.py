@@ -7,10 +7,17 @@ import random
 from song import songs
 from talktown.business import Bar
 
-def establish_setting():
+date_gameplay_begins = (1870, 10, 18)
+
+def get_year_gameplay_begins():
+  return date_gameplay_begins[0]
+
+def get_year_gen_starts():
+  return Game().config.date_worldgen_begins[0]
+
+def establish_setting(emitter=None):
   # Have TOTT do its thing.
-  tott_instance = Game()
-  date_gameplay_begins = (1870, 10, 18)
+  tott_instance = Game(emitter)
   tott_instance.ordinal_date_that_gameplay_begins = ( datetime.date(*date_gameplay_begins).toordinal() )
   tott_instance.establish_setting()
   tott_instance.enact_no_fi_simulation()

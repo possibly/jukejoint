@@ -6,11 +6,10 @@ from talktown.person import Person, PersonExNihilo
 import random
 from song import songs
 from talktown.business import Bar
-
-date_gameplay_begins = (1870, 10, 18)
+import config
 
 def get_year_gameplay_begins():
-  return date_gameplay_begins[0]
+  return config.date_gameplay_begins[0]
 
 def get_year_gen_starts():
   return Game().config.date_worldgen_begins[0]
@@ -18,7 +17,7 @@ def get_year_gen_starts():
 def establish_setting(emitter=None):
   # Have TOTT do its thing.
   tott_instance = Game(emitter)
-  tott_instance.ordinal_date_that_gameplay_begins = ( datetime.date(*date_gameplay_begins).toordinal() )
+  tott_instance.ordinal_date_that_gameplay_begins = ( datetime.date(*config.date_gameplay_begins).toordinal() )
   tott_instance.establish_setting()
   tott_instance.enact_no_fi_simulation()
 
@@ -28,12 +27,11 @@ def establish_setting(emitter=None):
     Bar(owner=owner)
 
   #Rig the city to have a bar with two people in it
-  num_people_to_target = 2
   oldest_bar_in_town = min(tott_instance.city.businesses_of_type('Bar'), key=lambda b: b.founded)
-  if len(oldest_bar_in_town.people_here_now) > num_people_to_target:
-      for person in list(oldest_bar_in_town.people_here_now)[num_people_to_target:]:
+  if len(oldest_bar_in_town.people_here_now) > config.num_people_to_target:
+      for person in list(oldest_bar_in_town.people_here_now)[config.num_people_to_target:]:
           person.go_to(person.home, 'home')
-  while len(oldest_bar_in_town.people_here_now) < num_people_to_target:
+  while len(oldest_bar_in_town.people_here_now) < config.num_people_to_target:
       adults_in_town = [p for p in tott_instance.city.residents if p.adult]
       random.choice(adults_in_town).go_to(oldest_bar_in_town, 'leisure')
   chosen_bar = oldest_bar_in_town
@@ -48,20 +46,21 @@ def establish_setting(emitter=None):
 
 def establish_monologue(artist_name, people_here_now):
   current_song = [song for song in songs if song.artist_name == artist_name][0]
-  current_song.reset() # in case this is a replay through of the game.
+  current_song.reset() # in case this is a replay of the game.
   continue_song = True
   patrons = [people_here_now[0], people_here_now[1]]
 
   # Modify TOTT's People to keep some additional state.
   def make_decision(self):
     self.made_decision = True
+    people_here_now.remove(self)
 
   Person.make_decision = make_decision
   PersonExNihilo.make_decision = make_decision
 
   for person in people_here_now:
-      person.mind.made_decision = False
-      person.mind.explicit_thoughts = []
+    person.mind.made_decision = False
+    person.mind.explicit_thoughts = []
 
   #Loop through song lyrics
   while continue_song:
@@ -78,10 +77,8 @@ def establish_monologue(artist_name, people_here_now):
           thought.execute()
           person.mind.explicit_thoughts.append(thought.realize().lstrip())
           person.mind.thoughts.append(thought)
-          if person.mind.made_decision:
-              people_here_now.remove(person)
-              if len(people_here_now) == 0:
-                continue_song = False
+          if len(people_here_now) == 0:
+            continue_song = False
         else:
           person.mind.explicit_thoughts.append('...')
 

@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+}
+
+html, body {
+  background-color: black;
+  height: 100%;
+}
+
+@font-face { 
+  font-family: Neon; 
+  src: url('../fonts/Neon.ttf'); 
+}
+
+@font-face { 
+  font-family: Pacfont; 
+  src: url('../fonts/PAC-FONT.ttf'); 
+}
+
+nav {
+  width: 25%;
+  float: left;
+  border: white;
+  border-style: double;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-width: 10px;
+  height: 100%;
+  padding-top: 20px;
+}
+
+.pac-font {
+  font-family: Pacfont;
+  color: white;
+  font-size: 40px;
+}
+
+span.pac-font {
+  text-shadow: 0 0 10px #fff, 
+  0 0 20px #fff, 
+  0 0 30px #fff, 
+  0 0 40px #fff, 
+  0 0 70px #fff, 
+  0 0 80px #fff;
+}
+
+button.pac-font {
+  border-width: 0px;
+  background-color: transparent;
+  padding: 0px 0px 0px;
+}
+
+button.pac-font:hover{
+  text-shadow: 0 0 10px #fff, 
+  0 0 20px #fff, 
+  0 0 30px #fff, 
+  0 0 40px #fff, 
+  0 0 70px #fff, 
+  0 0 80px #fff;
+  color: white;
+}
+
+.neon-text {
+  font-family: Neon; 
+}
+
+.neon-text.red{
+  text-shadow: 0 0 10px #fff, 
+  0 0 20px #fff, 
+  0 0 30px #fff, 
+  0 0 40px #ff0066, 
+  0 0 70px #ff0066, 
+  0 0 80px #ff0066;
+  color: #ff0066;
+}
+
+.neon-text.blue{
+  text-shadow: 0 0 10px #fff, 
+  0 0 20px #fff, 
+  0 0 30px #fff, 
+  0 0 40px #00dcff, 
+  0 0 70px #00dcff, 
+  0 0 80px #00dcff;
+  color: #00dcff;
+  position: relative; 
+  left: 60px; 
+  bottom: 30px;
+}
+
+.logo {
+  font-size: 100px;
+}
+
+.logo-container {
+  width: 100%; 
+  text-align: center;
+  transform: rotate(-9deg);
+  position: relative;
+  right: 15px;
+}

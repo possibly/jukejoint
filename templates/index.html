@@ -3,16 +3,27 @@
 <head>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
   <script src="/static/js/main.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/css/main.css">
   <script> var socket = io.connect(); </script>
   <title>Jukejoint</title>
 </head>
 <body>
-  <div class="game-container">
-    {% include 'title-screen.html' %}
-    <div id='game-loading' style='display: none;'></div>
-    <div id='dialogue-intro' style='display: none;'></div>
-    {% include 'song-selection.html' %}
-    <div id='monologues' style='display: none;'></div>
-  </div>
+  <nav>
+    <div class='logo-container'>
+      <span class='neon-text red logo'>Juke</span>
+    </div>
+    <div class='logo-container'>
+      <span class='neon-text blue logo'>Joint</span>
+    </div>
+
+    <br>
+    
+    <div style='text-align: center; width: 100%;'>
+      <span class='pac-font'>-.-.-.-</span><br><br>
+      <button class='pac-font'>PLAY!</button><br><br>
+      <button class='pac-font'>ABOUT9</button><br><br>
+      <span class='pac-font'>.-.-.-.</span>
+    </div>
+  </nav>
 </body>
 </html>

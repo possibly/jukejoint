@@ -7,6 +7,26 @@ html, body {
   height: 100%;
 }
 
+@font-face {
+  font-family: FPPONE;
+  src: url('../fonts/fppone.ttf');
+}
+
+@font-face {
+  font-family: GoodTimes;
+  src: url('../fonts/goodtimes.ttf');
+}
+
+@font-face {
+  font-family: FancyPants;
+  src: url('../fonts/fancypants.ttf');
+}
+
+@font-face {
+  font-family: Krinkes;
+  src: url('../fonts/krinkes.ttf');
+}
+
 @font-face { 
   font-family: Neon; 
   src: url('../fonts/Neon.ttf'); 
@@ -17,32 +37,46 @@ html, body {
   src: url('../fonts/PAC-FONT.ttf'); 
 }
 
+@font-face {
+  font-family: Retrahaus;
+  src: url('../fonts/Retrahaus.ttf');
+}
+
 nav {
   width: 25%;
   float: left;
-  border: white;
-  border-style: double;
-  border-top: none;
-  border-bottom: none;
-  border-left: none;
-  border-width: 10px;
+  border-color: white;
+  // border-style: none solid none none;
+  border-width: 5px;
   height: 100%;
-  padding-top: 20px;
+  padding-top: 1em;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#nav-border-glow {
+  position: absolute;
+  left: 100%;
+  bottom: 0%;
+  width: 5px;
+  height: 100%;
+  box-shadow: 0 0 10px #fff, 
+  0 0 20px #fff, 
+  0 0 30px #fff;
+  z-index: 1;
 }
 
 .pac-font {
   font-family: Pacfont;
-  color: white;
   font-size: 40px;
 }
 
-span.pac-font {
-  text-shadow: 0 0 10px #fff, 
-  0 0 20px #fff, 
-  0 0 30px #fff, 
-  0 0 40px #fff, 
-  0 0 70px #fff, 
-  0 0 80px #fff;
+.pac-font-color-on {
+  color: white;
+}
+
+.pac-font-color-off {
+  color: grey;
 }
 
 button.pac-font {
@@ -52,13 +86,8 @@ button.pac-font {
 }
 
 button.pac-font:hover{
-  text-shadow: 0 0 10px #fff, 
-  0 0 20px #fff, 
-  0 0 30px #fff, 
-  0 0 40px #fff, 
-  0 0 70px #fff, 
-  0 0 80px #fff;
-  color: white;
+  text-shadow: 0 0 20px yellow;
+  color: yellow;
 }
 
 .neon-text {
@@ -83,13 +112,16 @@ button.pac-font:hover{
   0 0 70px #00dcff, 
   0 0 80px #00dcff;
   color: #00dcff;
-  position: relative; 
-  left: 60px; 
-  bottom: 30px;
 }
 
 .logo {
   font-size: 100px;
+}
+
+.logo-bottom {
+  position: relative; 
+  left: 60px; 
+  bottom: 30px;
 }
 
 .logo-container {
@@ -98,4 +130,254 @@ button.pac-font:hover{
   transform: rotate(-9deg);
   position: relative;
   right: 15px;
+}
+
+#c-container {
+  width: 70%;
+  display: inline-block;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 8em;
+}
+
+#c {
+  width: 100%;
+  height: 100%;
+}
+
+.c-brick-bar-ad{
+  border-style: solid;
+  border-color: black;
+  border-width: 6px;
+  background-color: silver;
+  background-image: linear-gradient(335deg, white 23px, transparent 23px),
+  linear-gradient(155deg, white 23px, transparent 23px),
+  linear-gradient(335deg, white 23px, transparent 23px),
+  linear-gradient(155deg, white 23px, transparent 23px);
+  background-size: 58px 58px; 
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+}
+
+.c-on {
+  display: block;
+  opacity: 1;
+}
+
+.c-flicker {
+  -webkit-animation-name: flicker-gc-bricks-on;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: steps(2, start);
+}
+
+.c-off {
+  display: none;
+}
+
+.g{
+  border-style: groove;
+  border-color: grey;
+  border-radius: 1em;
+}
+
+.g:hover{
+  box-shadow: 0 0 20px #00dcff,0 0 70px #00dcff;
+  border-color: white;
+  background-color: #00dcff;
+}
+
+.logo-bricks{
+  background-color: silver;
+  background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
+  linear-gradient(155deg, #d00 23px, transparent 23px),
+  linear-gradient(335deg, #b00 23px, transparent 23px),
+  linear-gradient(155deg, #d00 23px, transparent 23px);
+  background-size: 58px 58px; 
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+  box-shadow: inset -100px -100px 200px -90px black,
+    inset -100px -100px 200px -90px black,
+    inset -100px -100px 200px -90px black,
+    inset 100px 100px 200px -90px black,
+    inset 100px 100px 200px -90px black,
+    inset 100px 100px 200px -90px black;
+  position: absolute;
+}
+
+#logo-bricks-container {
+  width: 400px;
+  height: 250px;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 0;
+}
+
+.flicker-bricks-off{
+  opacity: 0;
+  -webkit-animation-name: flicker-invisible;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+}
+
+.flicker-logos-off-red{
+  color: black;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  -webkit-animation-name: flicker-lights-off-red;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+}
+
+.flicker-logos-off-blue{
+  color: black;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  -webkit-animation-name: flicker-lights-off-blue;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+}
+
+#glow-container {
+  box-sizing: border-box;
+  height: 80%;
+  padding: 4em;
+  display: inline-block;
+  width: 95%;
+  border-radius: 3em;
+  border-width: 6px;
+  border-style: solid;
+  position: relative;
+}
+
+.glow-container-on {
+  border-color: #F3F315;
+  box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315,
+      inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
+  -webkit-animation-name: flicker-gc-on;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: steps(2, start);
+}
+
+.glow-container-off {
+  border-color: #3c3c3c;
+}
+
+#glow-container-bricks-container {
+  width: 57%;
+  height: 68%;
+  margin: -40px;
+  z-index: 0;
+}
+
+.glow-container-bricks-on {
+  background-color: silver;
+  background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
+  linear-gradient(155deg, #d00 23px, transparent 23px),
+  linear-gradient(335deg, #b00 23px, transparent 23px),
+  linear-gradient(155deg, #d00 23px, transparent 23px);
+  background-size: 58px 58px; 
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+  box-shadow: inset -100px -100px 100px -90px black,
+    inset -100px -100px 100px -90px black,
+    inset -100px -100px 100px -90px black,
+    inset 100px 100px 100px -90px black,
+    inset 100px 100px 100px -90px black,
+    inset 100px 100px 100px -90px black;
+  position: absolute;
+  opacity: 1;
+  -webkit-animation-name: flicker-gc-bricks-on;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: steps(2, start);
+}
+
+.glow-container-bricks-off {
+  display: none;
+}
+
+#barName {
+  font-size: 65px;
+  font-family: Krinkes;
+  text-align: center;
+}
+
+#quenching {
+  font-size: 25px;
+  margin-top: 2%;
+  margin-left: 5%;
+  font-family: FPPONE;
+  transform: scaleY(1.5);
+  letter-spacing: 2px;
+}
+
+#city {
+  font-size: 55px;
+  font-family: FPPONE;
+  text-align: center;
+  transform: rotate(-7deg) scaleY(1.5);
+  letter-spacing: 18px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+#thirstSince {
+  font-size: 25px;
+  text-align: right;
+  margin-right: 7%;
+  font-family: FPPONE;
+}
+
+#date {
+  font-size: 95px;
+  font-family: Retrahaus;
+  text-align: right;
+  margin-right: 5%;
+}
+
+#tvJuke {
+  font-size: 25px;
+  text-align: center;
+}
+
+#proceed {
+  background-color: black;
+  border: solid;
+  border-color: #F3F315;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  color: #F3F315;
+  margin: auto;
+  margin-top: 80px;
+  display: block;
+  text-shadow: 0 0 20px yellow;
+}
+
+#proceed:hover {
+  box-shadow: 0 0 20px yellow, inset 0 0 20px yellow;
+}
+
+#proceed:active {
+  text-shadow: none;
+  color: grey;
+  box-shadow: none;
+  border-color: grey;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn .5s ease-in 1 forwards;
+}
+
+#load-bar {
+  color: white;
+}
+
+#load-bar-from-to-date {
+  color: white;
 }

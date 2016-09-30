@@ -4,26 +4,42 @@
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
   <script src="/static/js/main.js"></script>
   <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/animations.css">
   <script> var socket = io.connect(); </script>
   <title>Jukejoint</title>
 </head>
 <body>
   <nav>
+
+    <div class='logo-bricks' id='logo-bricks-container'></div>
+
     <div class='logo-container'>
-      <span class='neon-text red logo'>Juke</span>
+      <span id='top-logo' class='neon-text red logo'>Juke</span>
     </div>
     <div class='logo-container'>
-      <span class='neon-text blue logo'>Joint</span>
+      <span id='bottom-logo' class='neon-text blue logo logo-bottom'>Joint</span>
     </div>
 
     <br>
-    
-    <div style='text-align: center; width: 100%;'>
-      <span class='pac-font'>-.-.-.-</span><br><br>
-      <button class='pac-font'>PLAY!</button><br><br>
-      <button class='pac-font'>ABOUT9</button><br><br>
-      <span class='pac-font'>.-.-.-.</span>
+
+    <div style='text-align: center; width: 100%;' class='z2'>
+      <span class='pac-font pac-font-color-on'>-.-.-.-</span><br><br>
+      <button id='play-button' class='pac-font pac-font-color-on' onclick='load()'>PLAY!</button><br><br>
+      <button class='pac-font pac-font-color-on'>ABOUT9</button><br><br>
+      <span class='pac-font pac-font-color-on'>.-.-.-.</span>
     </div>
+
   </nav>
+
+  <div id='c-container'>
+    <div id='glow-container-bricks-container' class='glow-container-bricks-off'></div>
+    <div id='glow-container' class='glow-container-off'>
+      <div id='c' class='c-off'>
+
+      </div>
+    </div>
+    <button id='proceed' style='opacity: 0;'></button>
+  </div>
+
 </body>
 </html>

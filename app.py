@@ -41,6 +41,19 @@ def establish_setting():
   db[request.sid]['city name'] = info['city name'].upper()
   emit('setting established')
 
+@socketio.on('outside bar')
+def outside_bar():
+  bar_name = db[request.sid]['bar name']
+  city_name_plural = db[request.sid]['city name'] + "'"
+  if city_name_plural[len(city_name_plural)-2:] != 'S':
+    city_name_plural += 'S'
+
+  emit('outside bar ready', (render_template('outside-bar.html',
+    bar_name=bar_name,
+    city_name_plural=city_name_plural,
+    bar_founded=db[request.sid]['bar founded']
+  ), 'Enter '+bar_name), room=request.sid)
+
 @socketio.on('intro loading')
 def intro_loading():
   emit('intro prepared', render_template('dialogue-intro.html',
@@ -73,4 +86,4 @@ def song_selection(artist_name):
   ), room=request.sid)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=True)

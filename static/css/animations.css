@@ -1,0 +1,649 @@
+@keyframes fadeIn{
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes flicker-invisible {
+  from {
+    opacity: 0.7;
+  }
+  4% {
+    opacity: 0.7;
+  }
+  6% {
+    opacity: 0.85;
+  }
+  8% {
+    opacity: 0.75;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  11% {
+    opacity: 0.7;
+  }
+  12% {
+    opacity: 1.0;
+  }
+  14% {
+    opacity: 0.7;
+  }
+  16% {
+    opacity: 1.0;
+  }
+  17% {
+    opacity: 0.7;
+  }
+  19% {
+    opacity: 0.7;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  24% {
+    opacity: 0.7;
+  }
+  26% {
+    opacity: 1.0;
+  }
+  28% {
+    opacity: 0.7;
+  }
+  38% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  42% {
+    opacity: 1.0;
+  }
+  44% {
+    opacity: 0.7;
+  }
+  46% {
+    opacity: 0.7;
+  }
+  56% {
+    opacity: 0.7;
+  }
+  58% {
+    opacity: 1.0;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  68% {
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 1.0; /*peak*/
+  }
+  72% {
+    opacity: 0.7;
+  }
+  93% {
+    opacity: 0.7;
+  }
+  95% {
+    opacity: 1.0; /*peak*/
+  }
+  97% {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+
+@-webkit-keyframes flicker-lights-off-red {
+  from {
+    color: #ff0066;
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  4% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  6% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  8% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  10% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  11% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  12% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  14% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  16% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  17% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  19% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  20% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  24% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  26% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  28% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  38% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+  }
+  40% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  42% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  44% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  46% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  56% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  58% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  60% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  68% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  70% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  72% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  93% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  95% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066, 
+    0 0 70px #ff0066;
+  }
+  97% {
+    color: #ff0066;
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #ff0066;
+  }
+  to {
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  }
+}
+
+@-webkit-keyframes flicker-lights-off-blue {
+  from {
+    color: #00dcff;
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  4% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  6% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  8% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  10% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  11% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  12% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  14% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  16% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  17% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  19% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  20% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  24% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  26% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  28% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  38% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+  }
+  40% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff;
+  }
+  42% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  44% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  46% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  56% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  58% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  60% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  68% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  70% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  72% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  93% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  95% {
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff, 
+    0 0 70px #00dcff;
+  }
+  97% {
+    color: #00dcff;
+    text-shadow: 0 0 10px #fff, 
+    0 0 20px #fff, 
+    0 0 30px #fff, 
+    0 0 40px #00dcff;
+  }
+  to {
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  }
+}
+
+@-webkit-keyframes flicker-gc-on {
+  0% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  1% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  4% { 
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  7% { 
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  8% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  12% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  22% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  23% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315
+  }
+  26% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  28% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  34% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
+  }
+  36% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  42% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  55% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
+  }
+  60% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  63% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
+  }
+  67% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  72% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  73% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  76% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  78% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  84% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
+  }
+  86% {
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+  96% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 17px #F3F315, 0 0 38px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 17px #F3F315, inset 0 0 38px #F3F315;
+  }
+  100% {
+    border-color: #F3F315;
+    box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315, inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
+  }
+}
+
+@-webkit-keyframes flicker-gc-bricks-on {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 0.7;
+  }
+  4% { 
+    opacity: 0.7;  
+  }
+  7% { 
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.8;  
+  }
+  12% {
+    opacity: 0;
+  }
+  22% {
+    opacity: 0;
+  }
+  23% {
+    opacity: 0.8;  
+  }
+  26% {
+    opacity: 0;
+  }
+  28% {
+    opacity: 0.7;  
+  }
+  34% {
+    opacity: 0.7;  
+  }
+  36% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 0.7;  
+  }
+  55% {
+    opacity: 0.8;  
+  }
+  60% {
+    opacity: 0;
+  }
+  63% {
+    opacity: 0.8;  
+  }
+  67% {
+    opacity: 0;
+  }
+  72% {
+    opacity: 0;
+  }
+  73% {
+    opacity: 0.7;
+  }
+  76% {
+    opacity: 0;
+  }
+  78% {
+    opacity: 0.7;
+  }
+  84% {
+    opacity: 0.8;
+  }
+  86% {
+    opacity: 0;
+  }
+  96% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}

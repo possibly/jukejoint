@@ -358,6 +358,10 @@ button.pac-font:hover{
   text-shadow: 0 0 20px yellow;
 }
 
+.proceed-off {
+  opacity: 0;
+}
+
 #proceed:hover {
   box-shadow: 0 0 20px yellow, inset 0 0 20px yellow;
 }
@@ -371,7 +375,12 @@ button.pac-font:hover{
 
 .fade-in {
   opacity: 0;
-  animation: fadeIn .5s ease-in 1 forwards;
+  animation: flicker-gc-bricks-on .5s ease-in 1 forwards;
+}
+
+.fade-out {
+  opacity: 1;
+  animation: flicker-invisible .5s ease-in 1 forwards;
 }
 
 #load-bar {

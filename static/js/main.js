@@ -77,11 +77,20 @@ function toggleOutsideBarBricks(){
 
 function toggleProceedButton(){
   var proceedBtn = document.getElementById('proceed');
-  if (!proceedBtn.classList.contains('fade-in') && !proceedBtn.classList.contains('fade-out')){
-    proceedBtn.classList.toggle('fade-in');
+  if (proceedBtn.classList.contains('proceed-off')){
+    proceedBtn.addEventListener('webkitAnimationEnd', function(){
+      proceedBtn.classList.remove('fade-in');
+      this.removeEventListener('webkitAnimationEnd', arguments.callee);
+    });
+    proceedBtn.classList.remove('proceed-off');
+    proceedBtn.classList.add('fade-in');
   } else {
-    proceedBtn.classList.toggle('fade-in');
-    proceedBtn.classList.toggle('fade-out');
+    proceedBtn.addEventListener('webkitAnimationEnd', function(){
+      proceedBtn.classList.remove('fade-out');
+      proceedBtn.classList.add('proceed-off');
+      this.removeEventListener('webkitAnimationEnd', arguments.callee);
+    });
+    proceedBtn.classList.add('fade-out');
   }
 }
 

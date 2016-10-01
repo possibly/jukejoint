@@ -4,6 +4,12 @@
   }
 }
 
+@keyframes fadeOut{
+  to {
+    opacity: 0;
+  }
+}
+
 @-webkit-keyframes flicker-invisible {
   from {
     opacity: 0.7;

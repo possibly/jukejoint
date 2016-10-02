@@ -45,7 +45,7 @@ def establish_setting():
 def outside_bar():
   bar_name = db[request.sid]['bar name']
   city_name_plural = db[request.sid]['city name'] + "'"
-  if city_name_plural[len(city_name_plural)-2:] != 'S':
+  if city_name_plural[len(city_name_plural)-2:len(city_name_plural)-1] != 'S':
     city_name_plural += 'S'
 
   emit('outside bar ready', (render_template('outside-bar.html',

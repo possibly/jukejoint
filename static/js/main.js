@@ -85,9 +85,10 @@ function toggleGameBorder(){
   }
 }
 
-function toggleOutsideBarBricks(){
+function toggleGlowContainer(bgStyle, adStyle){
   var ad = document.getElementById('c');
   var gcbc = document.getElementById('glow-container-bricks-container');
+  if (bgStyle){ gcbc.classList.add(bgStyle); }
 
   if (gcbc.classList.contains('glow-container-bricks-off')){
     gcbc.addEventListener('webkitAnimationEnd', function(){
@@ -97,13 +98,13 @@ function toggleOutsideBarBricks(){
     gcbc.classList.remove('glow-container-bricks-off');
     gcbc.classList.add('glow-container-bricks-on');
     gcbc.classList.add('glow-container-bricks-flicker-on');
-    ad.classList.add('c-brick-bar-ad');
+    ad.classList.add(adStyle);
   } else {
     gcbc.addEventListener('webkitAnimationEnd', function(){
       gcbc.classList.remove('glow-container-bricks-on');
       gcbc.classList.add('glow-container-bricks-off');
       gcbc.classList.remove('glow-container-bricks-flicker-off');
-      ad.classList.remove('c-brick-bar-ad');
+      ad.classList.remove(adStyle);
       this.removeEventListener('webkitAnimationEnd', arguments.callee);
     });
     gcbc.classList.add('glow-container-bricks-flicker-off');
@@ -173,7 +174,7 @@ function prepareOutsideBar(outsideBarTemplate, proceedText){
     });
     toggleC();
     toggleGameBorder();
-    toggleOutsideBarBricks();
+    toggleGlowContainer('bricks', 'c-brick-bar-ad');
   });
   c.addEventListener('webkitAnimationEnd', function(){
     setTimeout(toggleProceedButton, 1500);
@@ -183,7 +184,7 @@ function prepareOutsideBar(outsideBarTemplate, proceedText){
   setTimeout(function(){
     toggleC();
     toggleGameBorder();
-    toggleOutsideBarBricks();
+    toggleGlowContainer('bricks', 'c-brick-bar-ad');
   }, 300)
 }
 
@@ -192,5 +193,6 @@ function prepareIntro(dialogueIntroTemplate){
   setTimeout(function(){
     toggleC();
     toggleGameBorder();
+    toggleGlowContainer('upholstery', '');
   }, 700)
 }

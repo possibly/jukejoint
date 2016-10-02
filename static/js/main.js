@@ -65,14 +65,49 @@ function toggleC(){
 }
 
 function toggleGameBorder(){
-  document.getElementById('glow-container').classList.toggle('glow-container-off');
-  document.getElementById('glow-container').classList.toggle('glow-container-on');
+  var gc = document.getElementById('glow-container');
+  if (gc.classList.contains('glow-container-off')){
+    gc.addEventListener('webkitAnimationEnd', function(){
+      gc.classList.add('glow-container-on');
+      gc.classList.remove('glow-container-flicker-on');
+      this.removeEventListener('webkitAnimationEnd', arguments.callee);
+    });
+    gc.classList.remove('glow-container-off');
+    gc.classList.add('glow-container-flicker-on');
+  } else {
+    gc.addEventListener('webkitAnimationEnd', function(){
+      gc.classList.add('glow-container-off');
+      gc.classList.remove('glow-container-flicker-off');
+      this.removeEventListener('webkitAnimationEnd', arguments.callee);
+    });
+    gc.classList.remove('glow-container-on');
+    gc.classList.add('glow-container-flicker-off');
+  }
 }
 
 function toggleOutsideBarBricks(){
-  document.getElementById('c').classList.toggle('c-brick-bar-ad');
-  document.getElementById('glow-container-bricks-container').classList.toggle('glow-container-bricks-off');
-  document.getElementById('glow-container-bricks-container').classList.toggle('glow-container-bricks-on');
+  var ad = document.getElementById('c');
+  var gcbc = document.getElementById('glow-container-bricks-container');
+
+  if (gcbc.classList.contains('glow-container-bricks-off')){
+    gcbc.addEventListener('webkitAnimationEnd', function(){
+      gcbc.classList.remove('glow-container-bricks-flicker-on');
+      this.removeEventListener('webkitAnimationEnd', arguments.callee);
+    });
+    gcbc.classList.remove('glow-container-bricks-off');
+    gcbc.classList.add('glow-container-bricks-on');
+    gcbc.classList.add('glow-container-bricks-flicker-on');
+    ad.classList.add('c-brick-bar-ad');
+  } else {
+    gcbc.addEventListener('webkitAnimationEnd', function(){
+      gcbc.classList.remove('glow-container-bricks-on');
+      gcbc.classList.add('glow-container-bricks-off');
+      gcbc.classList.remove('glow-container-bricks-flicker-off');
+      ad.classList.remove('c-brick-bar-ad');
+      this.removeEventListener('webkitAnimationEnd', arguments.callee);
+    });
+    gcbc.classList.add('glow-container-bricks-flicker-off');
+  }
 }
 
 function toggleProceedButton(){
@@ -113,7 +148,6 @@ function prepareGameLoading(gameLoadingTemplate){
       toggleProceedButton();
       toggleC();
       document.getElementById('c').addEventListener('webkitAnimationEnd', function(){
-        console.log('prepareGameLoading');
         socket.on('outside bar ready', prepareOutsideBar);
         socket.emit('outside bar');
         this.removeEventListener('webkitAnimationEnd', arguments.callee);
@@ -130,9 +164,20 @@ function updateLoadBar(tott_event){
 
 function prepareOutsideBar(outsideBarTemplate, proceedText){
   var c = document.getElementById('c');
-  setProceedButton(proceedText);
+  setProceedButton(proceedText, function(){
+    toggleProceedButton();
+    document.getElementById('c').addEventListener('webkitAnimationEnd', function(){
+      socket.on('intro prepared', prepareIntro);
+      socket.emit('intro loading');
+      this.removeEventListener('webkitAnimationEnd', arguments.callee);
+    });
+    toggleC();
+    toggleGameBorder();
+    toggleOutsideBarBricks();
+  });
   c.addEventListener('webkitAnimationEnd', function(){
     setTimeout(toggleProceedButton, 1500);
+    this.removeEventListener('webkitAnimationEnd', arguments.callee);
   });
   c.innerHTML = outsideBarTemplate;
   setTimeout(function(){
@@ -140,4 +185,12 @@ function prepareOutsideBar(outsideBarTemplate, proceedText){
     toggleGameBorder();
     toggleOutsideBarBricks();
   }, 300)
+}
+
+function prepareIntro(dialogueIntroTemplate){
+  document.getElementById('c').innerHTML = dialogueIntroTemplate;
+  setTimeout(function(){
+    toggleC();
+    toggleGameBorder();
+  }, 700)
 }

@@ -255,14 +255,25 @@ button.pac-font:hover{
   border-color: #F3F315;
   box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315,
       inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
+}
+
+.glow-container-off {
+  border-color: #3c3c3c;
+}
+
+.glow-container-flicker-on {
+  border-color: #F3F315;
+  box-shadow: 0 0 5px #F3F315, 0 0 10px #F3F315, 0 0 15px #F3F315, 0 0 20px #F3F315, 0 0 30px #F3F315, 0 0 40px #F3F315,
+      inset 0 0 5px #F3F315, inset 0 0 10px #F3F315, inset 0 0 15px #F3F315, inset 0 0 20px #F3F315, inset 0 0 30px #F3F315, inset 0 0 40px #F3F315;
   -webkit-animation-name: flicker-gc-on;
   -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: steps(2, start);
 }
 
-.glow-container-off {
+.glow-container-flicker-off {
   border-color: #3c3c3c;
+  animation: flicker-gc-on 1s ease-in 1 backwards;
 }
 
 #glow-container-bricks-container {
@@ -270,6 +281,7 @@ button.pac-font:hover{
   height: 68%;
   margin: -40px;
   z-index: 0;
+  position: absolute;
 }
 
 .glow-container-bricks-on {
@@ -286,16 +298,22 @@ button.pac-font:hover{
     inset 100px 100px 100px -90px black,
     inset 100px 100px 100px -90px black,
     inset 100px 100px 100px -90px black;
-  position: absolute;
   opacity: 1;
-  -webkit-animation-name: flicker-gc-bricks-on;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: 1;
-  -webkit-animation-timing-function: steps(2, start);
 }
 
 .glow-container-bricks-off {
   display: none;
+}
+
+.glow-container-bricks-flicker-off {
+  animation: flicker-gc-bricks-on 1s steps(2, start) 1 backwards;
+}
+
+.glow-container-bricks-flicker-on {
+  -webkit-animation-name: flicker-gc-bricks-on;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: steps(2, start);
 }
 
 #barName {

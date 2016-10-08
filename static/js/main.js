@@ -1,14 +1,3 @@
-function load(){
-  toggleLogo();
-
-  document.getElementById('top-logo').addEventListener('webkitAnimationEnd', function(){
-    toggleNavButtons();
-    toggleC();
-    socket.on('loading prepared', prepareGameLoading);
-    socket.emit('game loading');
-  });
-}
-
 function toggleLogo() {
   var bricks = document.getElementById('logo-bricks-container');
   if (!bricks.classList.contains('flicker-bricks-off') && !bricks.classList.contains('flicker-bricks-on')){
@@ -42,8 +31,11 @@ function toggleNavButtons(){
   document.getElementById('play-button').disabled = true;
 }
 
-function toggleC(){
-  var c = document.getElementById('c');
+function toggleC(flickerObj){
+  var c;
+  if (flickerObj){ c = document.getElementById(flickerObj); }
+  else { c = document.getElementById('c'); }
+
   if (c.classList.contains('c-off')){
     c.addEventListener('webkitAnimationEnd', function(){
       c.classList.remove('c-flicker');
@@ -135,6 +127,17 @@ function setProceedButton(text, fn){
   document.getElementById('proceed').onclick = fn;
 }
 
+function load(){
+  toggleLogo();
+
+  document.getElementById('top-logo').addEventListener('webkitAnimationEnd', function(){
+    toggleNavButtons();
+    toggleC();
+    socket.on('loading prepared', prepareGameLoading);
+    socket.emit('game loading');
+  });
+}
+
 function prepareGameLoading(gameLoadingTemplate){
   var c = document.getElementById('c')
   c.innerHTML = gameLoadingTemplate;
@@ -188,11 +191,132 @@ function prepareOutsideBar(outsideBarTemplate, proceedText){
   }, 300)
 }
 
-function prepareIntro(dialogueIntroTemplate){
-  document.getElementById('c').innerHTML = dialogueIntroTemplate;
+function dialogueObject(name, line){ return {'speaker': name, 'line': line} }
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var personVizMale = ['A', 'D', 'F', 'H', 'J', 'K', 'M'];
+var personVizFemale = ['B', 'E'];
+var personVizAndrogenous = ['C', 'G', 'I', 'L'];
+
+var dialogueScript = {
+  'next': function(){
+      this['_index'] += 1;
+      return this.data[this['_index']-1];
+    },
+  'peek': function(){
+      var ndObject = this.next();
+      this['_index'] -= 1;
+      return ndObject;
+    },
+  'previous': function(){ 
+    if ( this['_index'] == 0 ){ return dialogueObject(); }
+    return this.data[this['_index']-1]; 
+  },
+  '_index': 0,
+  'data':[
+    dialogueObject('Jukebox', ''),
+    dialogueObject('Jukebox', 'Krmmph'),
+    dialogueObject('Jukebox', 'Click.'),
+    dialogueObject('Jukebox', 'Pop.'),
+    dialogueObject('name_a', "That machine's got a mind of its own!"),
+    dialogueObject('name_b', "Maybe...it's haunted..."),
+    dialogueObject('Jukebox', 'Click.'),
+    dialogueObject('Jukebox', 'Krmmph.'),
+    dialogueObject('Jukebox', 'Pop.'),
+    dialogueObject('name_a', "It's been playing songs all by itself!"),
+    dialogueObject('Jukebox', 'Bzzzzzzz.'),
+    dialogueObject('name_a', "(You've got to come to a decision...Do you stay here...or do you go?)"),
+    dialogueObject('name_b', "(I really need to figure this out, and figure it out now. I just don't know if I can leave this town.)"),
+    dialogueObject('Jukebox', 'Bzzzzzzzzzzzzzzzzzzzzzzzzz.'),
+    dialogueObject('Jukebox', 'Bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz.')
+  ]
+}
+
+function chooseGenderedIcon(gender){
+  if (getRandomIntInclusive(0, 1) == 0){
+    return personVizAndrogenous[getRandomIntInclusive(0, personVizAndrogenous.length-1)];
+  } else if (gender == 'female'){ 
+    return personVizFemale[getRandomIntInclusive(0, personVizFemale.length-1)]; 
+  } else {
+    return personVizMale[getRandomIntInclusive(0, personVizMale.length-1)]; 
+  }
+}
+
+function updateDialogueScript(nameA, nameB, genderA, genderB){
+  var personAViz = chooseGenderedIcon(genderA);
+  var personBViz = chooseGenderedIcon(genderB);
+
+  dialogueScript.data = dialogueScript.data.map(function(dObject){
+    if (dObject.speaker == 'name_a'){
+      dObject.speaker = nameA;
+      dObject.viz = personAViz;
+    }
+    else if(dObject.speaker == 'name_b'){
+      dObject.speaker = nameB; 
+      dObject.viz = personBViz;
+    }
+    return dObject;
+  });
+}
+
+function displayDialogue(){
+  var jukebox = document.getElementById('jukebox');
+  var person = document.getElementById('person');
+  var line = document.getElementById('line');
+  var previousSpeaker = dialogueScript.previous().speaker;
+  var nextDialoguePiece = dialogueScript.next();
+  
+  if (nextDialoguePiece.speaker == 'Jukebox'){
+    jukebox.style.display = 'block';
+    person.style.display = 'none';
+  } else {
+    var personViz = document.getElementById('person-viz');
+    var personName = document.getElementById('person-name');
+    jukebox.style.display = 'none';
+    person.style.display = 'block';
+    personName.innerHTML = nextDialoguePiece.speaker;
+    personViz.innerHTML = nextDialoguePiece.viz;
+  }
+
+  if (previousSpeaker == nextDialoguePiece.speaker){
+    line.innerHTML += '<br>' + nextDialoguePiece.line;
+  } else {
+    line.innerHTML = nextDialoguePiece.line
+  }
+}
+
+function prepareIntro(dialogueIntroTemplate, nameA, nameB, genderA, genderB){
+  var c = document.getElementById('c');
+  setProceedButton('Next >', function(){
+    try{
+      displayDialogue();
+    }catch(e){
+      c.addEventListener('webkitAnimationEnd', function(){
+        prepareSongSelection();
+        this.removeEventListener('webkitAnimationEnd', arguments.callee);
+      });
+      toggleC();
+      toggleProceedButton();
+      toggleGameBorder();
+    }
+  });
+  c.addEventListener('webkitAnimationEnd', function(){
+    setTimeout(toggleProceedButton, 300);
+    this.removeEventListener('webkitAnimationEnd', arguments.callee);
+  });
+  c.innerHTML = dialogueIntroTemplate;
+  updateDialogueScript(nameA, nameB, genderA, genderB);
   setTimeout(function(){
     toggleC();
     toggleGameBorder();
-    toggleGlowContainer('upholstery', '');
-  }, 700)
+    displayDialogue();
+  }, 300)
+}
+
+function prepareSongSelection(){
 }

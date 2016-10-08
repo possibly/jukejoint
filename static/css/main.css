@@ -8,18 +8,18 @@ html, body {
 }
 
 @font-face {
+  font-family: jukebox;
+  src: url('../fonts/jukebox.ttf');
+}
+
+@font-face {
+  font-family: people;
+  src: url('../fonts/people.ttf');
+}
+
+@font-face {
   font-family: FPPONE;
   src: url('../fonts/fppone.ttf');
-}
-
-@font-face {
-  font-family: GoodTimes;
-  src: url('../fonts/goodtimes.ttf');
-}
-
-@font-face {
-  font-family: FancyPants;
-  src: url('../fonts/fancypants.ttf');
 }
 
 @font-face {
@@ -422,4 +422,34 @@ button.pac-font:hover{
 
 #load-bar-from-to-date {
   text-align: center;
+  padding-top: 15%;
+}
+
+#line-box {
+  text-align: center;
+  padding-top: 45px;
+}
+
+#speaker-box {
+  font-family: jukebox;
+  text-align: center;
+}
+
+#jukebox-viz {
+  width: 100px;
+  height: 80px;
+  background-image: url('../img/jbimg.png');
+  background-size: cover;
+  display: inline-block;
+}
+
+#person-viz { 
+  width: 100px;
+  height: 80px;
+  font-family: people;
+  font-size: 100px;
+}
+
+#person-name {
+  font-family: helvetica;
 }

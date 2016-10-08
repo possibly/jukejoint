@@ -56,13 +56,15 @@ def outside_bar():
 
 @socketio.on('intro loading')
 def intro_loading():
-  emit('intro prepared', render_template('dialogue-intro.html',
-    name_a=db[request.sid]['personA'],
-    name_b=db[request.sid]['personB'],
-    bar_name=db[request.sid]['bar name'],
-    bar_founded=db[request.sid]['bar founded'],
-    city_name=db[request.sid]['city name']
-  ), room=request.sid)
+  emit('intro prepared', (
+      render_template('dialogue-intro.html'), 
+      db[request.sid]['personA'].name, 
+      db[request.sid]['personB'].name,
+      'male' if db[request.sid]['personA'].male else 'female',
+      'female' if db[request.sid]['personB'].female else 'male'
+    ), 
+    room=request.sid
+  );
 
 @socketio.on('game loading')
 def game_loading():

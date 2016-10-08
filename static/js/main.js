@@ -297,7 +297,8 @@ function prepareIntro(dialogueIntroTemplate, nameA, nameB, genderA, genderB){
       displayDialogue();
     }catch(e){
       c.addEventListener('webkitAnimationEnd', function(){
-        prepareSongSelection();
+        socket.on('song selection ready', prepareSongSelection);
+        socket.emit('prepare song selection');
         this.removeEventListener('webkitAnimationEnd', arguments.callee);
       });
       toggleC();
@@ -318,5 +319,23 @@ function prepareIntro(dialogueIntroTemplate, nameA, nameB, genderA, genderB){
   }, 300)
 }
 
-function prepareSongSelection(){
+function prepareSongSelection(template){
+  var c = document.getElementById('c');
+  c.innerHTML = template;
+  setTimeout(function(){
+    toggleC();
+    toggleGameBorder();
+  }, 300)
+}
+
+function selectSong(artist_name){
+  socket.on('song ready', prepareMonologues);
+  socket.emit('song selection', artist_name);
+  toggleC();
+  toggleGameBorder();
+}
+
+function prepareMonologues(){
+  toggleC();
+  toggleGameBorder();
 }

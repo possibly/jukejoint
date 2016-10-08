@@ -375,18 +375,20 @@ button.pac-font:hover{
 }
 
 #proceed {
+  margin: auto;
+  margin-top: 2em;
+  display: block;
+}
+
+.jjbutton {
   background-color: black;
   border: solid;
   border-color: #F3F315;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   color: #F3F315;
-  margin: auto;
-  margin-top: 2em;
-  display: block;
   text-shadow: 0 0 20px yellow;
 }
 
@@ -394,11 +396,11 @@ button.pac-font:hover{
   opacity: 0;
 }
 
-#proceed:hover {
+.jjbutton:hover {
   box-shadow: 0 0 20px yellow, inset 0 0 20px yellow;
 }
 
-#proceed:active {
+.jjbutton:active {
   text-shadow: none;
   color: grey;
   box-shadow: none;
@@ -451,4 +453,27 @@ button.pac-font:hover{
 
 #person-name {
   font-family: helvetica;
+}
+
+#song-selection {
+  margin-top: 5%;
+  text-align: center;
+}
+
+#song-selection button.jjbutton {
+  margin-bottom: 5%;
+  color: white;
+  border-color: white;
+  text-shadow: 0 0 20px white, 0 0 40px white;
+}
+
+#song-selection button.jjbutton:hover {
+  box-shadow: 0 0 20px white, inset 0 0 20px white;
+}
+
+#song-selection .jjbutton:active {
+  text-shadow: none;
+  color: grey;
+  box-shadow: none;
+  border-color: grey;
 }

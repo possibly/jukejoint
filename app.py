@@ -73,6 +73,10 @@ def game_loading():
     year_gen_starts=jukejoint.get_year_gen_starts()
   ), room=request.sid)
 
+@socketio.on('prepare song selection')
+def prepare_song_selection():
+  emit('song selection ready', render_template('song-selection.html'), room=request.sid)
+
 @socketio.on('song selection')
 def song_selection(artist_name):
   personA = db[request.sid]['personA']
@@ -83,8 +87,6 @@ def song_selection(artist_name):
     thoughtsA=info['personA thoughts'], 
     thoughtsB=info['personB thoughts'],
     songSections=info['song sections'],
-    nameA=db[request.sid]['personA'],
-    nameB=db[request.sid]['personB']
   ), room=request.sid)
 
 if __name__ == '__main__':

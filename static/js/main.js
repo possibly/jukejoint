@@ -1,3 +1,8 @@
+var personAName = null;
+var personBName = null;
+var personAViz = null;
+var personBViz = null;
+
 function toggleLogo() {
   var bricks = document.getElementById('logo-bricks-container');
   if (!bricks.classList.contains('flicker-bricks-off') && !bricks.classList.contains('flicker-bricks-on')){
@@ -191,7 +196,9 @@ function prepareOutsideBar(outsideBarTemplate, proceedText){
   }, 300)
 }
 
-function dialogueObject(name, line){ return {'speaker': name, 'line': line} }
+function dialogueObject(name, line, viz){ 
+  return {'speaker': name, 'line': line, 'viz': viz} 
+}
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -208,18 +215,12 @@ var dialogueScript = {
       this['_index'] += 1;
       return this.data[this['_index']-1];
     },
-  'peek': function(){
-      var ndObject = this.next();
-      this['_index'] -= 1;
-      return ndObject;
-    },
   'previous': function(){ 
     if ( this['_index'] == 0 ){ return dialogueObject(); }
     return this.data[this['_index']-1]; 
   },
   '_index': 0,
   'data':[
-    dialogueObject('Jukebox', ''),
     dialogueObject('Jukebox', 'Krmmph'),
     dialogueObject('Jukebox', 'Click.'),
     dialogueObject('Jukebox', 'Pop.'),
@@ -240,7 +241,7 @@ var dialogueScript = {
 function chooseGenderedIcon(gender){
   if (getRandomIntInclusive(0, 1) == 0){
     return personVizAndrogenous[getRandomIntInclusive(0, personVizAndrogenous.length-1)];
-  } else if (gender == 'female'){ 
+  } else if (gender == 'female'){
     return personVizFemale[getRandomIntInclusive(0, personVizFemale.length-1)]; 
   } else {
     return personVizMale[getRandomIntInclusive(0, personVizMale.length-1)]; 
@@ -248,8 +249,10 @@ function chooseGenderedIcon(gender){
 }
 
 function updateDialogueScript(nameA, nameB, genderA, genderB){
-  var personAViz = chooseGenderedIcon(genderA);
-  var personBViz = chooseGenderedIcon(genderB);
+  personAName = nameA;
+  personBName = nameB;
+  personAViz = chooseGenderedIcon(genderA);
+  personBViz = chooseGenderedIcon(genderB);
 
   dialogueScript.data = dialogueScript.data.map(function(dObject){
     if (dObject.speaker == 'name_a'){
@@ -264,12 +267,12 @@ function updateDialogueScript(nameA, nameB, genderA, genderB){
   });
 }
 
-function displayDialogue(){
+function displayDialogue(script){
   var jukebox = document.getElementById('jukebox');
   var person = document.getElementById('person');
   var line = document.getElementById('line');
-  var previousSpeaker = dialogueScript.previous().speaker;
-  var nextDialoguePiece = dialogueScript.next();
+  var previousSpeaker = script.previous().speaker;
+  var nextDialoguePiece = script.next();
   
   if (nextDialoguePiece.speaker == 'Jukebox'){
     jukebox.style.display = 'block';
@@ -294,7 +297,7 @@ function prepareIntro(dialogueIntroTemplate, nameA, nameB, genderA, genderB){
   var c = document.getElementById('c');
   setProceedButton('Next >', function(){
     try{
-      displayDialogue();
+      displayDialogue(dialogueScript);
     }catch(e){
       c.addEventListener('webkitAnimationEnd', function(){
         socket.on('song selection ready', prepareSongSelection);
@@ -315,7 +318,7 @@ function prepareIntro(dialogueIntroTemplate, nameA, nameB, genderA, genderB){
   setTimeout(function(){
     toggleC();
     toggleGameBorder();
-    displayDialogue();
+    displayDialogue(dialogueScript);
   }, 300)
 }
 
@@ -335,7 +338,45 @@ function selectSong(artist_name){
   toggleGameBorder();
 }
 
-function prepareMonologues(){
-  toggleC();
-  toggleGameBorder();
+var monologueScript = {
+  'next': dialogueScript.next,
+  'previous': dialogueScript.previous,
+  '_index': 0,
+  'data': []
+}
+
+function buildMonologueScript(thoughtsA, thoughtsB, songSections){
+  var dObjects = []
+  for (var i = 0; i < songSections.length; i++){
+    dObjects.push( dialogueObject('Jukebox', songSections.shift().join(' ')) );
+    if (thoughtsA.length > 0){
+      dObjects.push( dialogueObject(personAName, thoughtsA.shift(), personAViz) );
+    }
+    if (thoughtsB.length > 0){
+      dObjects.push( dialogueObject(personBName, thoughtsB.shift(), personBViz) );
+    }
+  }
+  monologueScript.data = dObjects;
+}
+
+function prepareMonologues(template, thoughtsA, thoughtsB, songSections){
+  var c = document.getElementById('c');
+  setProceedButton('Next >', function(){
+    // try{
+      displayDialogue(monologueScript);
+    // }catch(e){
+    //   console.log('success');
+    // }
+  });
+  c.addEventListener('webkitAnimationEnd', function(){
+    toggleProceedButton();
+    this.removeEventListener('webkitAnimationEnd', arguments.callee);
+  });
+  buildMonologueScript(thoughtsA, thoughtsB, songSections);
+  c.innerHTML = template;
+  setTimeout(function(){
+    toggleC();
+    toggleGameBorder();
+    displayDialogue(monologueScript);
+  }, 300);
 }

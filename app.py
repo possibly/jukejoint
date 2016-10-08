@@ -83,11 +83,12 @@ def song_selection(artist_name):
   personB = db[request.sid]['personB']
   people_here_now = [personA, personB]
   info = jukejoint.establish_monologue(artist_name, people_here_now)
-  emit('song ready', render_template('monologues.html',
-    thoughtsA=info['personA thoughts'], 
-    thoughtsB=info['personB thoughts'],
-    songSections=info['song sections'],
-  ), room=request.sid)
+  emit('song ready', (
+      render_template('monologues.html'),
+      info['personA thoughts'], 
+      info['personB thoughts'],
+      info['song sections']
+    ), room=request.sid)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
